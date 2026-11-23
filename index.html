@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <title>Just a Blog</title>
+</head>
+<body>
+  <header>
+    <div class="logo">
+        <img src="images/moon.png" alt="Logo">
+        <h2>Just a Blog</h2>
+    </div>
+
+    <button class="hamburger" aria-label="Toggle navigation"
+            aria-expanded="false" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav id="menu" class="menu">
+        <a href="index.html">Home</a>
+        <a href="#">Videos</a>
+        <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="posts">
+      <a class="page" href="blog/triangles.html">
+        <img src="images/test_thumbnail2.png" alt="" loading="lazy">
+        <h4>The Beauty of Simplicity: A Love Letter to Triangles</h4>
+        <p>November 23, 2026</p>
+      </a>
+
+      <a class="page" href="blog/post1.html">
+        <img src="images/test_thumbnail2.png" alt="" loading="lazy">
+        <h4>Post Title</h4>
+        <p>October 30, 2026</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright &copy; 2026 • Ojor Emmanuel • All rights reserved.</p>
+  </footer>
+
+  <script src="scripts/script.js"></script>
+</body>
+</html>
