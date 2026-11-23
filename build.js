@@ -18,6 +18,7 @@ const ROOT = __dirname;
 const POSTS_DIR = path.join(ROOT, 'posts');
 const OUT_DIR = path.join(ROOT, 'blog');
 const TPL_DIR = path.join(ROOT, 'templates');
+const SITE_URL = 'https://magnums123.github.io/just-a-blog/';
 
 // ---------- helpers ----------
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -77,13 +78,20 @@ function loadPosts() {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.date || '')) {
       console.warn(`  warn: ${file} has no valid "date: YYYY-MM-DD" — it will sort last`);
     }
-    posts.push({ slug, title, date: meta.date || '', thumbnail: meta.thumbnail || '', body });
+    posts.push({ slug, title, date: meta.date || '', thumbnail: meta.thumbnail || '', summary: meta.summary || '', body });
   }
   posts.sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
   return posts;
 }
 
 // ---------- build ----------
+function descriptionOf(p) {
+  if (p.summary) return p.summary;            // optional "summary:" in front matter
+  const m = MarkdownConverter.parse(p.body).match(/<p>([\s\S]*?)<\/p>/);
+  const text = m ? m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : '';
+  return text.length > 160 ? text.slice(0, 157) + '…' : text;
+}
+
 function build() {
   const indexTpl = fs.readFileSync(path.join(TPL_DIR, 'index.template.html'), 'utf8');
   const postTpl = fs.readFileSync(path.join(TPL_DIR, 'post.template.html'), 'utf8');
@@ -95,6 +103,9 @@ function build() {
   for (const p of posts) {
     const html = fill(postTpl, {
       root: '../',
+      url: esc(SITE_URL + 'blog/' + encodeURIComponent(p.slug) + '.html'),
+      ogimage: esc(SITE_URL + (p.thumbnail || 'images/moon.png').split('/').map(encodeURIComponent).join('/')),
+      description: esc(descriptionOf(p)),
       title: esc(p.title),
       date: esc(formatDate(p.date)),
       hero: p.thumbnail ? `      <img src="../${esc(p.thumbnail)}" alt="">` : '',
