@@ -5,7 +5,7 @@ thumbnail: images/triangle-rasterization-thumbnail.png
 # draft: false
 ---
 
-To you all who feel that this is meaningless, here's a simple yet complicated algorithm that's behind most of the visuals you see on your screens, be it your phone, PC, television, smartwatch, or even a smart fridge 😅
+To you all who feel that maths is meaningless, here's a simple yet complicated algorithm that's behind most of the visuals you see on your screens, be it your phone, PC, television, smartwatch, or even a smart fridge 😅
 
 Early computer scientists faced a problem when it came to rendering arbitrary shapes on computer screens. Using seven-segment displays to render numbers didn't quite cut it, so they needed a way to draw objects on more sophisticated 2D screens made up of pixels.
 
